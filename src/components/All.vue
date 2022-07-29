@@ -5,7 +5,6 @@
   export default {
     data() {
         return {
-            visibleItems: store.state.visibleItems,
             listData: store.state.listData
         }
     },
