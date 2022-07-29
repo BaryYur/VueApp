@@ -71,5 +71,6 @@
     color: grey;
     text-decoration: line-through;
     transition: all 0.3s ease-in-out;
+    font-style: italic;
   }
 </style>

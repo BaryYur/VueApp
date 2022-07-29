@@ -29,7 +29,7 @@
           checked: false
         }
 
-        this.listData.push(itemData)
+        this.listData.unshift(itemData)
         localStorage.setItem("items", JSON.stringify(this.listData))
         this.inputValue = ""
       },

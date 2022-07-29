@@ -5,11 +5,13 @@
   export default {
     data() {
         return {
-            visibleItems: store.state.visibleItems
+            visibleItems: store.state.visibleItems,
+            listData: store.state.listData
         }
     },
     methods: {
         deleteAllItemsHandler() {
+            this.listData = []
             localStorage.setItem('items', JSON.stringify([]))
         },
         checkAllItemsHandler() {
@@ -23,21 +25,28 @@
 
 <template>
     <div>
-        <p class="all-title">All items:</p>
-        <div class="btns-container">
-            <button @click="deleteAllItemsHandler" class="delete-all-btn">Delete all</button>
-            <button @click="checkAllItemsHandler" class="check-all-btn">Check all</button>
+        <div class="all-header">
+            <p class="all-title">All items:</p>
+            <div class="btns-container">
+                <button @click="deleteAllItemsHandler" class="delete-all-btn">Delete all</button>
+                <button @click="checkAllItemsHandler" class="check-all-btn">Check all</button>
+            </div>
         </div>
-        <ul> 
+        <ul v-if="listData.length > 0">  
             <ListItem />
         </ul>
+        <ul v-else></ul>
     </div>
 </template>
 
 <style  scoped>
+    .all-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
     .all-title {
-        text-align: center;
-        margin: 10px 0;
         font-size: 18px;
         font-weight: 600;
     }
@@ -73,10 +82,5 @@
 
     .check-all-btn:hover {
         background-color: rgb(113, 145, 243);
-    }
-
-    .btns-container {
-        display: flex;
-        justify-content: center;
     }
 </style>
