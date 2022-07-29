@@ -9,10 +9,10 @@
         }
     },
     methods: {
-        deleteAllItemsHandler() {
-            this.listData = []
-            localStorage.setItem('items', JSON.stringify([]))
-        },
+        // deleteAllItemsHandler() {
+        //     this.listData = []
+        //     localStorage.setItem('items', JSON.stringify([]))
+        // },
         checkAllItemsHandler() {
             let newData = store.state.listData.filter(item => item.checked = true)
             localStorage.setItem('items', JSON.stringify(newData))
@@ -27,7 +27,7 @@
         <div class="all-header">
             <p class="all-title">All items:</p>
             <div class="btns-container">
-                <button @click="deleteAllItemsHandler" class="delete-all-btn">Delete all</button>
+                <!-- <button @click="deleteAllItemsHandler" class="delete-all-btn">Delete all</button> -->
                 <button @click="checkAllItemsHandler" class="check-all-btn">Check all</button>
             </div>
         </div>
@@ -54,7 +54,7 @@
         padding-left: 0;
     }
  
-   .delete-all-btn {
+   /* .delete-all-btn {
         background-color: red;
         padding: 8px 13px;
         border: none;
@@ -66,7 +66,7 @@
 
     .delete-all-btn:hover {
         background-color: rgb(250, 69, 69);
-    }
+    } */
 
     .check-all-btn {
         background-color: royalblue;
