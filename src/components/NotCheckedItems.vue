@@ -16,6 +16,7 @@
         <ul>
             <li v-for="item in notCheckedItems">
                 <!-- <input type="checkbox" :id="item.id" /> -->
+                <span>&cross;</span>
                 <label :for="item.id">{{ item.inputValue }}</label>
                 <!-- <button class="del-button" @click="deleteItem(item.id)">del</button> -->
             </li>
@@ -37,5 +38,13 @@
 
     ul li {
         justify-content: center;
+    }
+
+    li {
+        display: block
+    }
+
+    li span {
+        margin-right: 20px;
     }
 </style>
