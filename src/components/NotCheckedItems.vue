@@ -46,5 +46,6 @@
 
     li span {
         margin-right: 20px;
+        color: darksalmon;
     }
 </style>

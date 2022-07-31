@@ -47,5 +47,6 @@
 
     li span {
         margin-right: 20px;
+        color: rgb(71, 199, 71);
     }
 </style>

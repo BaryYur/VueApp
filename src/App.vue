@@ -1,6 +1,7 @@
 <script>
   // import data from '../data/data.json'
   import Header from './components/Header.vue'
+  import { RouterLink, RouterView } from 'vue-router'
   import store from './store/store'
 
   export default {
@@ -9,14 +10,14 @@
           // data: data,
           inputValue: "",
           listData: store.state.listData,
-          checkedItems: store.state.listData.filter(item => item.checked === true) || [],
-          notCheckedItems: store.state.listData.filter(item => item.checked === false) || []
+          checkedItems: store.state.checkedListData,
+          notCheckedItems: store.state.listData.notCheckedListData
         }
     },
     methods: {
-      inputChangeHandler(event) {
-        this.inputValue = event.target.value
-      },
+      // inputChangeHandler(event) {
+      //   this.inputValue = event.target.value
+      // },
       submitHandler(event) {
         event.preventDefault()
 
@@ -32,15 +33,17 @@
         this.listData.unshift(itemData)
         localStorage.setItem("items", JSON.stringify(this.listData))
         this.inputValue = ""
+        this.updatingCheckedItems()
+        this.updatingNotCheckedItems()
       },
       updatingCheckedItems() {
-        this.checkedItems = store.state.listData.filter(item => item.checked === true)
+        this.checkedItems = JSON.parse(localStorage.getItem("items")).filter(item => item.checked === true)
       },
       updatingNotCheckedItems() {
-        this.notCheckedItems = store.state.listData.filter(item => item.checked === false)
-      }
+        this.notCheckedItems = JSON.parse(localStorage.getItem("items")).filter(item => item.checked === false)
+      },
     },
-    components: { Header },
+    components: { Header, RouterLink, RouterView },
   }
 </script>
 
@@ -48,21 +51,23 @@
   <div class="body">
     <Header></Header>
     <div class="to-do-list-container">
-      <form action="" @submit="submitHandler">
-        <input type="text" placeholder="Enter text" :value="inputValue" @change="inputChangeHandler" />
+      <form @submit="submitHandler">
+        <!-- <input type="text" placeholder="Enter text" :value="inputValue" @change="inputChangeHandler" /> -->
+        <!-- <input type="text" placeholder="Enter text" v-bind:value="inputValue" @input="inputValue = $event.target.value" /> -->
+        <input type="text" placeholder="Enter text" v-model="inputValue" />
         <button>Add</button>
       </form>
 
       <div class="nav-links-container">
         <div class="links-box">
-          <router-link to="/all">All</router-link> |
-          <router-link to="/checked" @click="updatingCheckedItems">Checked</router-link> |
-          <router-link to="/not-checked"  @click="updatingNotCheckedItems">Not checked</router-link>
+          <RouterLink to="/all">All</RouterLink> |
+          <RouterLink to="/checked" @click="updatingCheckedItems">Checked</RouterLink> |
+          <RouterLink to="/not-checked"  @click="updatingNotCheckedItems">Not checked</RouterLink>
         </div>
-        <router-view 
+        <RouterView 
           :checkedItems="checkedItems" 
           :notCheckedItems="notCheckedItems" 
-        ></router-view>
+        />
       </div>
     </div>
   </div>

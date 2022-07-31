@@ -1,29 +1,27 @@
 <script>
   import store from '../store/store'
 
-    export default {
-      data() {
-        return {
-          data: store.state.listData
-        }  
-      },
-      props: {
-        deleteItem: Function,
-      },
-      methods: {
-        checkingItemHandler(id) {
-          for (let i = 0; i < this.data.length; i++) {
-            if (this.data[i].id === id) {
-              localStorage.setItem("items", JSON.stringify(this.data))
-            }
+  export default {
+    data() {
+      return {
+        data: store.state.listData
+      }  
+    },
+    methods: {
+      checkingItemHandler(id) {
+        for (let i = 0; i < this.data.length; i++) {
+          if (this.data[i].id === id) {
+            localStorage.setItem("items", JSON.stringify(this.data))
           }
-        },
-        deleteItemHandler(id) {
-          localStorage.setItem("items", JSON.stringify(this.data.filter(item => item.id !== id)))
-          this.data = this.data.filter(item => item.id !== id)
-        },
-      }
+        }
+      },
+      deleteItemHandler(id) {
+        store.state.listData = store.state.listData.filter(item => item.id !== id)
+        localStorage.setItem("items", JSON.stringify(this.data.filter(item => item.id !== id)))
+        this.data = this.data.filter(item => item.id !== id)
+      },
     }
+  }
 </script>
 
 <template>
