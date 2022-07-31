@@ -9,7 +9,6 @@
         return {
           // data: data,
           inputValue: "",
-          listData: store.state.listData,
           checkedItems: store.state.checkedListData,
           notCheckedItems: store.state.listData.notCheckedListData
         }
@@ -30,8 +29,8 @@
           checked: false
         }
 
-        this.listData.unshift(itemData)
-        localStorage.setItem("items", JSON.stringify(this.listData))
+        store.state.listData.unshift(itemData)
+        localStorage.setItem("items", JSON.stringify(store.state.listData))
         this.inputValue = ""
         this.updatingCheckedItems()
         this.updatingNotCheckedItems()
@@ -41,7 +40,7 @@
       },
       updatingNotCheckedItems() {
         this.notCheckedItems = JSON.parse(localStorage.getItem("items")).filter(item => item.checked === false)
-      },
+      }
     },
     components: { Header, RouterLink, RouterView },
   }
